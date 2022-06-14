@@ -39,7 +39,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
       body: StreamBuilder<Details>(
           stream: DatabaseService(user.uid).userdata,
-
           builder: (context, snapshot) {
             if(snapshot.hasData){
 
@@ -218,13 +217,14 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: Text("Update",style: TextStyle(color: Colors.white),),
                         onPressed: () async {
                           await DatabaseService(user.uid).updateUserData(
-                            _currentName ?? userData.name,
+                            Details(_currentName ?? userData.name,
                             _currentMobileNo ?? userData.MobileNo,
                             _currentAge ?? userData.age,
                             _currentGender ?? userData.gender,
                             _currentHeight ?? userData.height,
                             _currentWeight ?? userData.weight,
-                            _currentCronicDisease ?? userData.cronicDisease
+                            _currentCronicDisease ?? userData.cronicDisease,
+                            "")
                           );
                           Navigator.pop(context);
                         },

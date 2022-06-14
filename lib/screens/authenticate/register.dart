@@ -1,3 +1,4 @@
+import 'package:pblproject/screens/authenticate/getUserDetails.dart';
 import 'package:pblproject/services/auth.dart';
 import 'package:pblproject/shared/loading.dart';
 import 'package:flutter/material.dart';
@@ -14,19 +15,15 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
 
-  final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
-  String error = '';
-  bool loading = false;
 
   // text field state
   String email = '';
   String password = '';
-  String name = '';
 
   @override
   Widget build(BuildContext context) {
-    return loading ? Loading() : Scaffold(
+    return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
         backgroundColor: Colors.lightBlueAccent,
@@ -55,13 +52,6 @@ class _RegisterState extends State<Register> {
               SizedBox(height: 20.0),
               SizedBox(height: 20.0),
               TextFormField(
-                decoration: textInputDecoration.copyWith(hintText: 'Name'),
-                onChanged: (val) {
-                  setState(() => name = val);
-                },
-              ),
-              SizedBox(height: 20.0),
-              TextFormField(
                 decoration: textInputDecoration.copyWith(hintText: 'Email'),
                 validator: (val) => val.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
@@ -81,26 +71,14 @@ class _RegisterState extends State<Register> {
               RaisedButton(
                   color: Colors.pink[400],
                   child: Text(
-                    'Register',
+                    'Next',
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: () async {
+                  onPressed: (){
                     if(_formKey.currentState.validate()){
-                      setState(() => loading = true);
-                      dynamic result = await _auth.registerWithEMailAndPassWord(name,email, password);
-                      if(result == null) {
-                        setState(() {
-                          loading = false;
-                          error = 'Please supply a valid email';
-                        });
-                      }
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => GetUserDetails(email: email,password: password)));
                     }
                   }
-              ),
-              SizedBox(height: 12.0),
-              Text(
-                error,
-                style: TextStyle(color: Colors.red, fontSize: 14.0,backgroundColor: Colors.white),
               )
             ],
           ),

@@ -8,15 +8,16 @@ class DatabaseService{
 
   final CollectionReference collection = Firestore.instance.collection('Hospital');
 
-  Future updateUserData(String name,String MobileNo,String age,String gender, String height,String weight,String cronicDisease) async {
+  Future updateUserData(Details userDetails) async {
+    print("Creating doc - "+uid.toString());
     return await collection.document(uid).setData(
-        {'name' : name,
-          'MobileNo' : MobileNo,
-          'age' : age,
-          'gender' : gender,
-          'height' : height,
-          'weight' : weight,
-          'cronicDisease' : cronicDisease,
+        {'name' : userDetails.name,
+          'MobileNo' : userDetails.MobileNo,
+          'age' : userDetails.age,
+          'gender' : userDetails.gender,
+          'height' : userDetails.height,
+          'weight' : userDetails.weight,
+          'cronicDisease' : userDetails.cronicDisease,
           'currentLocation' : "Room 1"
         }
     );
