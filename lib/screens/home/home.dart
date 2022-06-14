@@ -35,6 +35,7 @@ class Home extends StatelessWidget {
                     child: FlatButton.icon(
                         onPressed: () async {
                           await _auth.signOut();
+                          Navigator.pop(context);
                         },
                         icon: Icon(Icons.person),
                         label: Text("Logout")),
@@ -43,8 +44,9 @@ class Home extends StatelessWidget {
                     child: FlatButton.icon(
                         onPressed: () {
                           Navigator.push(
-                              context, MaterialPageRoute(builder: (context) => ProfilePage()));
+                              context, MaterialPageRoute(builder: (context) => ProfilePage())).then((value) => Navigator.pop(context));
                         },
+                        
                         icon: Icon(Icons.settings),
                         label: Text("Profile")),
                   )
