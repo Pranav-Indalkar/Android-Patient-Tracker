@@ -1,4 +1,4 @@
-# pblproject
+# Android Patient Tracker
 
 • Android App for storing and viewing patient information, which uses Firebase Authentication for User
 Registration and Login.
